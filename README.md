@@ -3,7 +3,7 @@
 
 ######DEFINITION OF DONE
 * Käyttötapaus/User story toimii alusta loppuun
-* yksikkötestit riittävällä tasolla ja EasyB
+* yksikkötestit riittävällä tasolla ja Cucumber
 * Koodi on siistiä / clean code, kaikkien hyväksymällä tasolla
-* javadoc
-* käytettävissä tuotannossa :P 
+* Koodi kommentoitu
+* käytettävissä tuotannossa
