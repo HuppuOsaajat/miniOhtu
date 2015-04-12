@@ -187,6 +187,7 @@ DEPENDENCIES
   database_cleaner
   jbuilder (~> 2.0)
   jquery-rails
+  minitest
   pg
   rails (= 4.2.0)
   rails_12factor

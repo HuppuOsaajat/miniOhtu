@@ -1,3 +1,7 @@
+require 'minitest/unit'
+require 'capybara/rails'
+
+
 Given /^user tries to add a book reference$/ do
   pending
 end
