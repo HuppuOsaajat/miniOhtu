@@ -15,3 +15,13 @@ Feature: User can add a book reference
     When the user tries to save the reference
     Then the reference is not saved
 
+  Scenario: User cannot add a book with a negative year
+    Given the user inputs a book with a negative year
+    When the user tries to save the reference
+    Then the reference is not saved
+
+  Scenario: User cannot add a book with a crazy big year
+    Given the user inputs a book with a crazy big year
+    When the user tries to save the reference
+    Then the reference is not saved
+
