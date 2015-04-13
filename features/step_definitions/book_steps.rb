@@ -30,19 +30,3 @@ Given(/^the user inputs a book with a crazy big year$/) do
   fill_in 'Publisher', :with => 'Rapsutin Oy'
   fill_in 'Year', :with => '22015'
 end
-
-#When(/^(.*) is pressed$/) do |b|
-#  click_link(b)
-#end
-
-When(/^the user tries to save the book by clicking(.*)$/) do |b|
-  click_button("Create Book")
-end
-
-Then(/^the reference with title (.*) is saved $/) do |b|
-  Book.where(title: b).count > 0
-end
-
-Then(/^the reference with title (.*) is not saved$/) do |b|
-  Book.where(title: b).count == 0
-end
