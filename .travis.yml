@@ -1,0 +1,8 @@
+language: ruby
+rvm:
+  - 2.2.0
+
+deploy:
+  provider: heroku
+  app: warm-beach-7855
+  api_key: "55af94ac-023c-417e-9484-6eb65222a18a"

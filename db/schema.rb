@@ -26,6 +26,7 @@ ActiveRecord::Schema.define(version: 20150409115743) do
     t.string   "edition"
     t.string   "month"
     t.text     "note"
+
   end
 
 end
