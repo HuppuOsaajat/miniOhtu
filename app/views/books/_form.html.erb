@@ -12,21 +12,26 @@
   <% end %>
 
   <div class="field">
-    <%= f.label :author %><br>
-    <%= f.text_field :author %>
+    <%= f.label :author %> <br>
+    <%= f.text_field :author %> *
   </div>
   <div class="field">
     <%= f.label :title %><br>
-    <%= f.text_field :title %>
+    <%= f.text_field :title %> *
   </div>
   <div class="field">
     <%= f.label :publisher %><br>
-    <%= f.text_field :publisher %>
+    <%= f.text_field :publisher %> *
   </div>
   <div class="field">
     <%= f.label :year %><br>
-    <%= f.number_field :year %>
+    <%= f.number_field :year %> *
   </div>
+<div>
+  * These fields are required
+</div>
+
+
   <div class="actions">
     <%= f.submit %>
   </div>
