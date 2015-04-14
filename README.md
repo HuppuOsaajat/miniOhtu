@@ -1,5 +1,7 @@
 # MiniOhtu [![Build Status](https://travis-ci.org/HuppuOsaajat/miniOhtu.svg)](https://travis-ci.org/HuppuOsaajat/miniOhtu)
 
+Nettisivu: http://warm-beach-7855.herokuapp.com/
+
 #### SCRUM-BOARD
 https://docs.google.com/spreadsheets/d/1nogja9t3KxbWuu0iMwdBXvG5GVWvWWAJyOvq-miM4PQ/edit?usp=sharing
 
