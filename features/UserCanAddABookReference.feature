@@ -25,3 +25,8 @@ Feature: User can add a book reference
     When the user tries to save the reference
     Then the reference is not saved
 
+  Scenario: A type book has right required fields:
+    Given the user is on the creation page
+    When the user wants to add a book reference
+    Then the creation page contains fields "Author", "Title", "Publisher" and "Year"
+
