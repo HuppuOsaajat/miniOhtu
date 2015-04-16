@@ -1,6 +1,9 @@
 class Bibref < ActiveRecord::Base
 
   has_many :fields
+  accepts_nested_attributes_for :fields
+
+  after_save :generate_empty_fields
 
   @@reference_types = {
       article: {
@@ -46,10 +49,26 @@ class Bibref < ActiveRecord::Base
   }
 
   def get_required_fields
-    @@reference_types["#{reftype}".to_sym][:required]
+    check_reftype_set
+    @@reference_types[reftype.to_sym][:required]
   end
 
   def get_optional_fields
-    @@reference_types["#{reftype}".to_sym][:optional]
+    check_reftype_set
+    @@reference_types[reftype.to_sym][:optional]
   end
+
+  private
+
+    # Creates empty and optional Fields for this Bibref if they don't exist already
+    def generate_empty_fields
+      all_fields = get_required_fields + get_optional_fields
+      all_fields.each do |r|
+        fields.create(name: r, content: '') unless fields.exists?(name: r)
+      end
+    end
+
+    def check_reftype_set
+      raise "Reftype can't be empty!" if reftype.nil?
+    end
 end

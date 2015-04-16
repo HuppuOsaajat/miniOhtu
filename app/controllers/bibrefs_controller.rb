@@ -28,7 +28,7 @@ class BibrefsController < ApplicationController
 
     respond_to do |format|
       if @bibref.save
-        format.html { redirect_to @bibref, notice: 'Reference was successfully created.' }
+        format.html { redirect_to edit_bibref_path(@bibref), notice: 'Reference was successfully created.' }
         format.json { render :show, status: :created, location: @bibref }
       else
         format.html { render :new }
