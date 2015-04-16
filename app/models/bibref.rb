@@ -60,7 +60,7 @@ class Bibref < ActiveRecord::Base
 
   private
 
-    # Creates empty and optional Fields for this Bibref if they don't exist already
+    # Creates empty Fields for this Bibref if they don't exist already
     def generate_empty_fields
       all_fields = get_required_fields + get_optional_fields
       all_fields.each do |r|
