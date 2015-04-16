@@ -27,3 +27,10 @@ jäljellä" sen hetkisen päivän kohdalle.
 * Koodi on siistiä / clean code, kaikkien hyväksymällä tasolla
 * Koodi kommentoitu
 * käytettävissä tuotannossa
+
+###
+
+HUOMHUOM: 
+
+Bibref - kenttä shortname:string
+Field - kentät bibref_id:integer name:string content:string
