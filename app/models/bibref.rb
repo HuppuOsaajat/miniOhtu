@@ -2,7 +2,7 @@ class Bibref < ActiveRecord::Base
 
   has_many :fields
 
-  @reference_types = {
+  @@reference_types = {
       article: {
           required: [:author, :title, :journal, :year, :volume],
           optional: [:number, :pages, :month, :note, :key]
@@ -14,10 +14,10 @@ class Bibref < ActiveRecord::Base
   }
 
   def get_required_fields
-    @reference_types[:reftype][:required]
+    @@reference_types["#{reftype}".to_sym][:required]
   end
 
   def get_optional_fields
-    @reference_types[:reftype][:optional]
+    @@reference_types["#{reftype}".to_sym][:optional]
   end
 end
