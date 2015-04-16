@@ -1,13 +1,15 @@
 # Read about fixtures at http://api.rubyonrails.org/classes/ActiveRecord/FixtureSet.html
 
 one:
-  author: MyString
-  title: MyString
-  publisher: MyString
-  year: 1
+  author: Janne
+  title: Miksi GUI on saatanasta?
+  publisher: Linus Torvalds Publishing Ltd.
+  year: 2008
+
 
 two:
-  author: MyString
-  title: MyString
-  publisher: MyString
-  year: 1
+  author: Juho
+  title: 2001 mahtavaa mämmireseptiä
+  publisher: Sanoma Oyj
+  year: 2015
+
