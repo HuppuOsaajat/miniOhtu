@@ -11,7 +11,13 @@
 #
 # It's strongly recommended that you check this file into your version control system.
 
-ActiveRecord::Schema.define(version: 20150410103725) do
+ActiveRecord::Schema.define(version: 20150416111750) do
+
+  create_table "bibrefs", force: :cascade do |t|
+    t.string   "shortname"
+    t.datetime "created_at", null: false
+    t.datetime "updated_at", null: false
+  end
 
   create_table "books", force: :cascade do |t|
     t.string   "author"
@@ -26,6 +32,14 @@ ActiveRecord::Schema.define(version: 20150410103725) do
     t.string   "volume"
     t.string   "month"
     t.string   "note"
+  end
+
+  create_table "fields", force: :cascade do |t|
+    t.integer  "bibref_id"
+    t.string   "name"
+    t.string   "content"
+    t.datetime "created_at", null: false
+    t.datetime "updated_at", null: false
   end
 
 end

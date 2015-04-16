@@ -1,4 +1,8 @@
 Rails.application.routes.draw do
+  resources :bibrefs
+
+  resources :unirefs
+
   resources :attributes
 
   resources :references

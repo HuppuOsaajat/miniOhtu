@@ -1,0 +1,21 @@
+<%= form_for(@uniref) do |f| %>
+  <% if @uniref.errors.any? %>
+    <div id="error_explanation">
+      <h2><%= pluralize(@uniref.errors.count, "error") %> prohibited this uniref from being saved:</h2>
+
+      <ul>
+      <% @uniref.errors.full_messages.each do |message| %>
+        <li><%= message %></li>
+      <% end %>
+      </ul>
+    </div>
+  <% end %>
+
+  <div class="field">
+    <%= f.label :shortname %><br>
+    <%= f.text_field :shortname %>
+  </div>
+  <div class="actions">
+    <%= f.submit %>
+  </div>
+<% end %>
