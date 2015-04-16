@@ -1,6 +1,6 @@
 class Bibref < ActiveRecord::Base
 
-  has_many :fields
+  has_many :fields, dependent: :destroy
 
   @reference_types = {
       article: {
