@@ -11,14 +11,7 @@
 #
 # It's strongly recommended that you check this file into your version control system.
 
-ActiveRecord::Schema.define(version: 20150414113525) do
-
-  create_table "attributes", force: :cascade do |t|
-    t.string   "name"
-    t.string   "value"
-    t.datetime "created_at", null: false
-    t.datetime "updated_at", null: false
-  end
+ActiveRecord::Schema.define(version: 20150410103725) do
 
   create_table "books", force: :cascade do |t|
     t.string   "author"
@@ -33,13 +26,6 @@ ActiveRecord::Schema.define(version: 20150414113525) do
     t.string   "volume"
     t.string   "month"
     t.string   "note"
-  end
-
-  create_table "references", force: :cascade do |t|
-    t.string   "type"
-    t.datetime "created_at", null: false
-    t.datetime "updated_at", null: false
-    t.string   "shortname"
   end
 
 end
