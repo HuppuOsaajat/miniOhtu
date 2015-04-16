@@ -1,6 +1,26 @@
 <h1>Editing Bibref</h1>
 
-<%= render 'form' %>
+<%= form_for(@bibref) do |f| %>
+
+    <%= render 'form_errors' %>
+
+    <div class="field">
+      <%= f.label :shortname %><br>
+      <%= f.text_field :shortname %>
+    </div>
+
+    <%= f.fields_for :fields do |attr_f| %>
+        <p>
+          <%= attr_f.label(:content) {attr_f.object.name} %><br>
+          <%= attr_f.text_field :content %>
+        </p>
+    <% end %>
+
+    <div class="actions">
+      <%= f.submit %>
+    </div>
+<% end %>
+
 
 <%= link_to 'Show', @bibref %> |
 <%= link_to 'Back', bibrefs_path %>

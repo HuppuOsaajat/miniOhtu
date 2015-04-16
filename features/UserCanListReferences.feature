@@ -13,3 +13,9 @@ Feature: User can list references
     And the reference can be seen in the listing
     And the user tries to delete the reference
     Then the reference can not be seen in the listing
+
+  Scenario: User can see all the saved BibTeX references
+    Given the user is on the listing page
+    When the user clicks "Show as BibTeX"
+    Then all the references can be seen in the listing as BibTeX format
+
