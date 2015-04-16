@@ -1,4 +1,8 @@
 Rails.application.routes.draw do
+  resources :attributes
+
+  resources :references
+
   resources :books
 
   # The priority is based upon order of creation: first created -> highest priority.
