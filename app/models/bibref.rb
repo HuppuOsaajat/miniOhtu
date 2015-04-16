@@ -1,5 +1,7 @@
 class Bibref < ActiveRecord::Base
 
+  has_many :fields
+
   @reference_types = {
       article: {
           required: [:author, :title, :journal, :year, :volume],

@@ -11,12 +11,13 @@
 #
 # It's strongly recommended that you check this file into your version control system.
 
-ActiveRecord::Schema.define(version: 20150416111750) do
+ActiveRecord::Schema.define(version: 20150416113133) do
 
   create_table "bibrefs", force: :cascade do |t|
     t.string   "shortname"
     t.datetime "created_at", null: false
     t.datetime "updated_at", null: false
+    t.string   "reftype"
   end
 
   create_table "books", force: :cascade do |t|
