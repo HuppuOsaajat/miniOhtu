@@ -28,7 +28,7 @@ class BibrefsController < ApplicationController
 
     respond_to do |format|
       if @bibref.save
-        format.html { redirect_to @bibref, notice: 'Bibref was successfully created.' }
+        format.html { redirect_to @bibref, notice: 'Reference was successfully created.' }
         format.json { render :show, status: :created, location: @bibref }
       else
         format.html { render :new }
@@ -42,7 +42,7 @@ class BibrefsController < ApplicationController
   def update
     respond_to do |format|
       if @bibref.update(bibref_params)
-        format.html { redirect_to @bibref, notice: 'Bibref was successfully updated.' }
+        format.html { redirect_to @bibref, notice: 'Reference was successfully updated.' }
         format.json { render :show, status: :ok, location: @bibref }
       else
         format.html { render :edit }
@@ -56,7 +56,7 @@ class BibrefsController < ApplicationController
   def destroy
     @bibref.destroy
     respond_to do |format|
-      format.html { redirect_to bibrefs_url, notice: 'Bibref was successfully destroyed.' }
+      format.html { redirect_to bibrefs_url, notice: 'Reference was successfully destroyed.' }
       format.json { head :no_content }
     end
   end
@@ -69,6 +69,6 @@ class BibrefsController < ApplicationController
 
     # Never trust parameters from the scary internet, only allow the white list through.
     def bibref_params
-      params.require(:bibref).permit(:shortname)
+      params.require(:bibref).permit(:shortname, :reftype)
     end
 end
