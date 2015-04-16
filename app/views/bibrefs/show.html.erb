@@ -4,6 +4,20 @@
   <strong>Shortname:</strong>
   <%= @bibref.shortname %>
 </p>
+<p>
+  <strong>Type:</strong>
+  <%= @bibref.reftype %>
+</p>
+
+<p>
+<strong>Attributes:</strong>
+
+<ul>
+  <% @bibref.fields.each do |field| %>
+      <li><%= field.name + ": " + field.content %></li>
+  <% end %>
+</ul>
+</p>
 
 <%= link_to 'Edit', edit_bibref_path(@bibref) %> |
 <%= link_to 'Back', bibrefs_path %>
