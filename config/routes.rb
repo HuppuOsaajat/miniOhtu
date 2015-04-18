@@ -1,5 +1,9 @@
 Rails.application.routes.draw do
   resources :bibrefs do
+    collection do
+      get 'bibtex_list'
+    end
+
     member do
       get 'bibtex'
     end

@@ -65,8 +65,19 @@ class BibrefsController < ApplicationController
     end
   end
 
+  # GET /bibrefs/1/bibtex
   def bibtex
     @bibref_bibtex = generate_bibtex(@bibref)
+  end
+
+  # GET /bibrefs/bibtex_list
+  def bibtex_list
+    @bibrefs_bibtex = '';
+    all_bibrefs = Bibref.all
+    all_bibrefs.each do |bibref|
+      @bibrefs_bibtex += generate_bibtex(bibref)
+      @bibrefs_bibtex += "\n\n" unless bibref == all_bibrefs.last
+    end
   end
 
   private
