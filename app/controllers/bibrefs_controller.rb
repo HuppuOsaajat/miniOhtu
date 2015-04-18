@@ -1,5 +1,9 @@
+require_relative '../scripts/bibtex_generator'
+
 class BibrefsController < ApplicationController
-  before_action :set_bibref, only: [:show, :edit, :update, :destroy]
+  include BibtexGenerator
+
+  before_action :set_bibref, only: [:show, :edit, :update, :destroy, :bibtex]
 
   # GET /bibrefs
   # GET /bibrefs.json
@@ -59,6 +63,10 @@ class BibrefsController < ApplicationController
       format.html { redirect_to bibrefs_url, notice: 'Reference was successfully destroyed.' }
       format.json { head :no_content }
     end
+  end
+
+  def bibtex
+    @bibref_bibtex = generate_bibtex(@bibref)
   end
 
   private
