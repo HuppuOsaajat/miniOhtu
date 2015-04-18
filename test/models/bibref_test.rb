@@ -7,7 +7,7 @@ class BibrefTest < ActiveSupport::TestCase
   end
 
   test 'get_required_fields should return fields' do
-    req_fields = @bibref_article.get_required_fields
+    req_fields = @bibref_article.get_required_field_symbols
 
     assert req_fields.include? :author
     assert req_fields.include? :title
@@ -18,7 +18,7 @@ class BibrefTest < ActiveSupport::TestCase
   end
 
   test 'get_optional_fields should return fields' do
-    opt_fields = @bibref_article.get_optional_fields
+    opt_fields = @bibref_article.get_optional_field_symbols
 
     assert opt_fields.include? :number
     assert opt_fields.include? :pages

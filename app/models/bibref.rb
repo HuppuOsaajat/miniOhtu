@@ -48,12 +48,33 @@ class Bibref < ActiveRecord::Base
       }
   }
 
+  #Sets the field specified in @field to @value
+  def set_field_value(field, value)
+    field = get_field(field)
+    field.update(content: value)
+    end
+
+  #Returns the field specified in @field
+  def get_field(field)
+    field = Field.find_by(name: field)
+  end
+
   def get_required_fields
+    required_field_symbols = get_required_field_symbols
+    fields.where(name: required_field_symbols)
+    end
+
+  def get_optional_fields
+    optional_field_symbols = get_optional_field_symbols
+    fields.where(name: optional_field_symbols)
+  end
+
+  def get_required_field_symbols
     check_reftype_set
     @@reference_types[reftype.to_sym][:required]
   end
 
-  def get_optional_fields
+  def get_optional_field_symbols
     check_reftype_set
     @@reference_types[reftype.to_sym][:optional]
   end
@@ -62,7 +83,7 @@ class Bibref < ActiveRecord::Base
 
     # Creates empty Fields for this Bibref if they don't exist already
     def generate_empty_fields
-      all_fields = get_required_fields + get_optional_fields
+      all_fields = get_required_field_symbols + get_optional_field_symbols
       all_fields.each do |r|
         fields.create(name: r, content: '') unless fields.exists?(name: r)
       end
