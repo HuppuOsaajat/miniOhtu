@@ -75,7 +75,7 @@ class BibrefsController < ApplicationController
     @bibrefs_bibtex = generate_all_bibtex
   end
 
-  # GET /bibreds/download
+  # GET /bibrefs/download
   def download
     send_data generate_all_bibtex, filename: 'references.bib'
   end
