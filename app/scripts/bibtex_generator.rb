@@ -20,6 +20,17 @@ module BibtexGenerator
 
   end
 
+  def generate_all_bibtex
+    bibrefs_bibtex = '';
+    all_bibrefs = Bibref.all
+    all_bibrefs.each do |bibref|
+      bibrefs_bibtex += generate_bibtex(bibref)
+      bibrefs_bibtex += "\n\n" unless bibref == all_bibrefs.last
+    end
+
+    bibrefs_bibtex
+  end
+
 
 
 

@@ -2,6 +2,7 @@ Rails.application.routes.draw do
   resources :bibrefs do
     collection do
       get 'bibtex_list'
+      get 'download'
     end
 
     member do

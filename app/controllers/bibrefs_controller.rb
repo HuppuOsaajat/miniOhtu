@@ -72,12 +72,12 @@ class BibrefsController < ApplicationController
 
   # GET /bibrefs/bibtex_list
   def bibtex_list
-    @bibrefs_bibtex = '';
-    all_bibrefs = Bibref.all
-    all_bibrefs.each do |bibref|
-      @bibrefs_bibtex += generate_bibtex(bibref)
-      @bibrefs_bibtex += "\n\n" unless bibref == all_bibrefs.last
-    end
+    @bibrefs_bibtex = generate_all_bibtex
+  end
+
+  # GET /bibreds/download
+  def download
+    send_data generate_all_bibtex, filename: 'references.bib'
   end
 
   private
