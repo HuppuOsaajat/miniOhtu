@@ -27,7 +27,6 @@ class Bibtex_generator_test < ActiveSupport::TestCase
 
   test 'bibtex contains fields and values' do
     bibtex = generate_bibtex(@book)
-    puts bibtex
     assert bibtex.include? 'author = {Testari Mestari},'
     assert bibtex.include? 'year = {1994},'
     assert bibtex.include? 'publisher = {Testausoppaat},'
