@@ -19,6 +19,18 @@ class Bibtex_generator_test < ActiveSupport::TestCase
   test 'the_first_line_is_correct' do
     first_line = generate_first_line(@book)
     assert_equal "@#{@book.reftype}{#{@book.shortname},", first_line
-    end
+  end
+
+  test 'bibtex has correct syntax' do
+    assert generate_bibtex(@book) =~ /^@[a-zA-Z]+ *\{ *[^,\{\}\n]+ *, *(\n* *[a-zA-Z]+ *= *\{[^\n]+\} *, *)*\n* *}/m
+  end
+
+  test 'bibtex contains fields and values' do
+    bibtex = generate_bibtex(@book)
+    assert bibtex.include? 'author = {Testari Mestari},'
+    assert bibtex.include? 'year = {1994},'
+    assert bibtex.include? 'publisher = {Testausoppaat},'
+    assert bibtex.include? 'title = {Näin väännät railsia},'
+  end
 
 end
