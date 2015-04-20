@@ -2,11 +2,29 @@
 
     <%= render 'form_errors' %>
 
-  <div class="field">
-    <%= f.label :shortname %><br>
-    <%= f.text_field :shortname %>
-  </div>
-  <div class="actions">
-    <%= f.submit %>
-  </div>
+
+    <div class="field">
+      <%= f.label :shortname %><br>
+      <%= f.text_field :shortname %>
+    </div>
+
+    <div class="field">
+      <%= f.label :reftype %><br>
+      <%= f.text_field :reftype %>
+    </div>
+
+
+    <% @fields.each do |field| %>
+
+        <% :content == field.content %>
+        <%= f.label field.name %><br>
+        <%= f.text_field :content %><br>
+    <% end %>
+
+
+
+
+    <div class="actions">
+      <%= f.submit %>
+    </div>
 <% end %>

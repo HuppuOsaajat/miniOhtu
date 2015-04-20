@@ -58,17 +58,37 @@ class Bibref < ActiveRecord::Base
     @@reference_types[reftype.to_sym][:optional]
   end
 
+  #I'll refactor later so it's one method with a parameter but will try to get this to work first okay :D
+
+  def generate_empty_req_fields
+
+    get_required_fields.each do |r|
+      fields.new(name: r, content: '') unless fields.exists?(name: r)
+
+    end
+  end
+
+  def generate_empty_opt_fields
+    get_optional_fields.each do |r|
+      fields.new(name: r, content: '') unless fields.exists?(name: r)
+    end
+  end
+
   private
 
-    # Creates empty and optional Fields for this Bibref if they don't exist already
-    def generate_empty_fields
-      all_fields = get_required_fields + get_optional_fields
-      all_fields.each do |r|
-        fields.create(name: r, content: '') unless fields.exists?(name: r)
-      end
-    end
+  # Creates empty and optional Fields for this Bibref if they don't exist already
 
-    def check_reftype_set
-      raise "Reftype can't be empty!" if reftype.nil?
+  def generate_empty_fields
+    all_fields = get_required_fields + get_optional_fields
+    all_fields.each do |r|
+      fields.create(name: r, content: '') unless fields.exists?(name: r)
+
     end
+  end
+
+
+
+  def check_reftype_set
+    raise "Reftype can't be empty!" if reftype.nil?
+  end
 end
