@@ -7,7 +7,7 @@
   <tr>
     <th>Shortname</th>
     <th>Type</th>
-    <th colspan="3"></th>
+    <th colspan="8"></th>
   </tr>
   </thead>
 
@@ -19,9 +19,20 @@
 
         <% reqfields = bibref.get_required_fields %>
 
+        <% max_req_fields = 5
+           req_fields_count = 0 %>
+
         <% reqfields.each do |field| %>
+
+            <% req_fields_count += 1 %>
+
             <td><%= field.content %></td>
         <% end %>
+
+        <% (max_req_fields - req_fields_count).times do %>
+            <td></td>
+        <% end %>
+
         <td><%= link_to 'Show', bibref %></td>
         <td><%= link_to 'Edit', edit_bibref_path(bibref) %></td>
         <td><%= link_to 'Destroy', bibref, method: :delete, data: {confirm: 'Are you sure?'} %></td>
