@@ -3,6 +3,9 @@ class Bibref < ActiveRecord::Base
   has_many :fields, dependent: :destroy
   accepts_nested_attributes_for :fields
 
+  validates :shortname, presence: true
+  validates :reftype, presence: true
+
   after_save :generate_empty_fields
 
   @@reference_types = {
@@ -132,6 +135,18 @@ class Bibref < ActiveRecord::Base
     if (get_required_field_symbols.include? field_type)
       if field_value.empty?
         @errors.add(field_type, "can't be blank")
+        return false
+      end
+    end
+
+    # Year
+    if field_type == :year
+      if field_value.to_i.to_s != field_value
+        @errors.add(field_type, "must be a number")
+        return false
+      end
+      unless field_value.to_i.between?(0, Time.now.year)
+        @errors.add(field_type, "must be a valid year")
         return false
       end
     end
