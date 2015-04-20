@@ -140,7 +140,7 @@ class Bibref < ActiveRecord::Base
     end
 
     # Year
-    if field_type == :year
+    if field_type == :year && !field_value.empty?
       if field_value.to_i.to_s != field_value
         @errors.add(field_type, "must be a number")
         return false
