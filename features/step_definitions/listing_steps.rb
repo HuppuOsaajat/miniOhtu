@@ -7,7 +7,7 @@ And (/^the user navigates to the listing page$/) do
 end
 
 Then (/^all the references can be seen in the listing as BibTeX format$/) do
-  assert page.has_content?('@BOOK (T15, AUTHOR = "Mestari Testeri", TITLE = "Näin luot Cucumber-testejä", PUBLISHER = "Rapsutin Oy", YEAR = 2015,')
+  assert page.has_content?('@book(T15, AUTHOR = "Mestari Testeri", TITLE = "Näin luot Cucumber-testejä", PUBLISHER = "Rapsutin Oy", YEAR = 2015,}')
 end
 
 Then (/^the reference can be seen in the listing$/) do

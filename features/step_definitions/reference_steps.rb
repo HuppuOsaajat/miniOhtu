@@ -1,53 +1,43 @@
 
-Given(/^the user inputs a x -type with all the required fields filled correctly$/) do
-  visit('/books/new')
-  fill_in 'Author', :with => 'Mestari Testeri'
-  fill_in 'Title', :with => 'Näin luot Cucumber-testejä'
-  fill_in 'Publisher', :with => 'Rapsutin Oy'
-  fill_in 'Year', :with => '2015'
+
+#Should be on the reference creation page before using this
+def fill_form_with_information_of(reference)
+
+  required_fields = reference.get_required_fields
+  optional_fields = reference.get_optional_fields
+
+  all_fields = required_fields + optional_fields
+
+  all_fields.each do |field|
+    fill_in field.name :with => field.content
+  end
+
 end
 
-Given(/^the user inputs a x -type with a missing required field$/) do
-  visit('/books/new')
-  fill_in 'Title', :with => 'Näin luot Cucumber-testejä'
-  fill_in 'Publisher', :with => 'Rapsutin Oy'
-  fill_in 'Year', :with => '2015'
-end
-
-Given(/^the user inputs a reference with a negative year$/) do
-  visit('/books/new')
-  fill_in 'Author', :with => 'Mestari Testeri'
-  fill_in 'Title', :with => 'Näin luot Cucumber-testejä'
-  fill_in 'Publisher', :with => 'Rapsutin Oy'
-  fill_in 'Year', :with => '-2015'
-end
-
-Given(/^the user inputs a reference with a crazy big year$/) do
-  visit('/books/new')
-  fill_in 'Author', :with => 'Mestari Testeri'
-  fill_in 'Title', :with => 'Näin luot Cucumber-testejä'
-  fill_in 'Publisher', :with => 'Rapsutin Oy'
-  fill_in 'Year', :with => '22015'
+Given (/^the user is on the reference creation page$/) do
+  visit('bibrefs/new')
 end
 
 Given (/^the user inputs a misc with empty fields$/) do
-  visit('/miscs/new')
+  step 'the user is on the reference creation page'
+  input_reference = Bibref.new(shortname: 'test', reftype: :misc)
+
 end
 
 Given(/^the user wants to add an article reference$/) do
-  visit('/articles/new')
+
 end
 
 Given (/^the user wants to add an indproceedings reference$/) do
-  visit('indproceedings/new')
+
 end
 
 Given (/^the user wants to add an inbook reference$/) do
-  visit('inbook/new')
+
 end
 
 Given (/^the user wants to add an incollection reference$/) do
-  visit('incollection/new')
+
 end
 
 Given (/^the user wants to add a phdthesis reference$/) do
@@ -55,7 +45,7 @@ Given (/^the user wants to add a phdthesis reference$/) do
 end
 
 When (/^the user tries to save the reference$/) do
-  click_button('Create a reference')
+  click_button('Update Bibref')
 end
 
 Then (/^the reference is saved$/) do

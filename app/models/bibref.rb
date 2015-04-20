@@ -48,6 +48,10 @@ class Bibref < ActiveRecord::Base
       }
   }
 
+  def self.possible_reftypes
+    @@reference_types.keys
+  end
+
   #Sets the field specified in @field to @value
   def set_field_value(field, value)
     field = get_field(field)

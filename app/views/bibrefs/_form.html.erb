@@ -10,7 +10,7 @@
 
     <div class="field">
       <%= f.label :reftype %><br>
-      <%= f.select :reftype, options_for_select(["book", "article", "inproceedings"]) %>
+      <%= f.select :reftype, options_for_select(Bibref.possible_reftypes) %>
     </div>
 
     <div class="actions">
