@@ -16,12 +16,12 @@ Feature: User can add a x -type reference
     Then the reference is not saved
 
   Scenario: User cannot add a x -type with a negative year
-    Given the user inputs a book with a negative year
+    Given the user inputs a reference with a negative year
     When the user tries to save the reference
     Then the reference is not saved
 
   Scenario: User cannot add a x -type with a crazy big year
-    Given the user inputs a book with a crazy big year
+    Given the user inputs a reference with a crazy big year
     When the user tries to save the reference
     Then the reference is not saved
 
@@ -43,7 +43,7 @@ Feature: User can add a x -type reference
   Scenario: A type inbook has right required fields
     Given the user wants to add an inbook reference
     When the user is on the creation page
-    Then the creation page contains fields "Author", "Title", "Chapter/pages", "Publisher" and "Year"
+    Then the creation page contains fields "Author", "Title", "Chapter", "Publisher" and "Year"
 
   Scenario: A type incollection has right required fields
     Given the user wants to add an incollection reference

@@ -30,3 +30,11 @@ Given(/^the user inputs a book with a crazy big year$/) do
   fill_in 'Publisher', :with => 'Rapsutin Oy'
   fill_in 'Year', :with => '22015'
 end
+
+When(/^the user wants to add a book reference$/) do
+
+end
+
+Then(/^the creation page contains fields "Author", "Title", "Publisher" and "Year"$/) do
+
+end
