@@ -2,7 +2,7 @@
 
 <h1>Listing References</h1>
 
-<table>
+<table border="1">
   <thead>
   <tr>
     <th>Shortname</th>
@@ -19,18 +19,17 @@
 
         <% reqfields = bibref.get_required_fields %>
 
-        <% max_req_fields = 5
-           req_fields_count = 0 %>
+        <% skip_fields_count = 5 %>
 
         <% reqfields.each do |field| %>
 
-            <% req_fields_count += 1 %>
+            <% skip_fields_count -= 1 %>
 
             <td><%= field.content %></td>
         <% end %>
 
-        <% (max_req_fields - req_fields_count).times do %>
-            <td></td>
+        <% if skip_fields_count > 0 %>
+            <td colspan="<%= skip_fields_count %>"></td>
         <% end %>
 
         <td><%= link_to 'Show', bibref %></td>
