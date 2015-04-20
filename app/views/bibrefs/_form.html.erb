@@ -10,7 +10,7 @@
 
     <div class="field">
       <%= f.label :reftype %><br>
-      <%= f.text_field :reftype %>
+      <%= f.select :reftype, options_for_select(["book", "article", "inproceedings"]) %>
     </div>
 
 
