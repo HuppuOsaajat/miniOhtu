@@ -10,7 +10,7 @@ When(/^the user clicks "([^"]*)"$/) do |link_name|
   click_link(link_name)
 end
 
-Then(/^the user is on the creation page$/) do
-  assert_equal ('/article/new'|'/book/new'|'/inbook/new'|'/incollection/new'|'/inproceedings/new'|'/misc/new'|'/phdthesis/new'), current_path
-end
 
+Then(/^the user is on the creation page$/) do
+  assert_equal '/bibrefs/new', current_path
+end

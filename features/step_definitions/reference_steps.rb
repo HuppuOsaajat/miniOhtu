@@ -2,6 +2,7 @@
 
 #Should be on the reference creation page before using this
 def fill_form_with_information_of(reference)
+  create_bibref_with(reference.reftype, reference.shortname)
 
   required_fields = reference.get_required_fields
   optional_fields = reference.get_optional_fields
@@ -9,91 +10,84 @@ def fill_form_with_information_of(reference)
   all_fields = required_fields + optional_fields
 
   all_fields.each do |field|
-    fill_in field.name :with => field.content
+    fill_in field.name, :with => field.content
   end
 
 end
+
+def create_bibref_with(reftype, shortname)
+  fill_in 'Shortname', :with => shortname
+  select reftype, :from => 'Reftype'
+  click_button('Create Bibref')
+end
+
 
 Given (/^the user is on the reference creation page$/) do
   visit('bibrefs/new')
 end
 
+misc_test = Bibref.new(shortname: 'test', reftype: :misc)
+misc_test.save
+
 Given (/^the user inputs a misc with empty fields$/) do
+
   step 'the user is on the reference creation page'
-  input_reference = Bibref.new(shortname: 'test', reftype: :misc)
-
+  fill_form_with_information_of(misc_test)
 end
 
-Given(/^the user wants to add an article reference$/) do
+Given(/^the user inputs a misc with non\-empty fields$/) do
+  misc_test.set_field_value(:title, 'Testaus')
 
+  step 'the user is on the reference creation page'
+  fill_form_with_information_of(misc_test)
 end
 
-Given (/^the user wants to add an indproceedings reference$/) do
 
+article = Bibref.new(shortname: 'test_article', reftype: :article)
+article.save
+article.set_field_value(:author, 'testeri')
+article.set_field_value(:journal, 'Testing Weekly')
+article.set_field_value(:title, 'Cucumber-rails is kinda cool')
+article.set_field_value(:year, 2014)
+article.set_field_value(:volume, 6)
+
+Given(/^the user correctly fills out the form for an article$/) do
+  step 'the user is on the reference creation page'
+  fill_form_with_information_of(article)
 end
 
-Given (/^the user wants to add an inbook reference$/) do
-
+Given(/^the user inputs a reference with a missing required field$/) do
+  step 'the user is on the reference creation page'
+  article.set_field_value(:title, '')
+  fill_form_with_information_of(article)
 end
 
-Given (/^the user wants to add an incollection reference$/) do
-
+Given(/^the user inputs a reference with a negative year$/) do
+  step 'the user is on the reference creation page'
+  article.set_field_value(:year, '-1994')
+  fill_form_with_information_of(article)
 end
 
-Given (/^the user wants to add a phdthesis reference$/) do
-  visit('phdthesis/new')
+Given(/^the user inputs a reference with a crazy big year$/) do
+  step 'the user is on the reference creation page'
+  article.set_field_value(:year, '11994')
+  fill_form_with_information_of(article)
 end
+
 
 When (/^the user tries to save the reference$/) do
   click_button('Update Bibref')
 end
 
 Then (/^the reference is saved$/) do
-  assert page.has_content?('was successfully created.')
+  assert page.has_content?('was successfully')
 end
 
 Then (/^the reference is not saved$/) do
-  assert !page.has_content?('was successfully created')
-end
-
-Then (/^the creation page contains fields "Author", "Title", "Journal", "Year" and "Volume"$/) do
-  assert page.has_content?('Author')
-  assert page.has_content?('Title')
-  assert page.has_content?('Journal')
-  assert page.has_content?('Year')
-  assert page.has_content?('Volume')
-end
-
-Then (/^the creation page contains fields "Author", "Title", "Booktitle" and "Year"$/) do
-  assert page.has_content?('Author')
-  assert page.has_content?('Title')
-  assert page.has_content?('Booktitle')
-  assert page.has_content?('Year')
-end
-
-Then (/^the creation page contains fields "Author", "Title", "Chapter", "Publisher" and "Year"$/) do
-  assert page.has_content?('Author')
-  assert page.has_content?('Title')
-  assert page.has_content?('Chapter')
-  assert page.has_content?('Publisher')
-  assert page.has_content?('Year')
-end
-
-Then (/^the creation page contains fields "Author", "Title", "Booktitle", "Publisher", and "Year"$/) do
-  assert page.has_content?('Author')
-  assert page.has_content?('Title')
-  assert page.has_content?('Booktitle')
-  assert page.has_content?('Publisher')
-  assert page.has_content?('Year')
-end
-
-Then (/^the creation page contains fields "Author", "Title", "School" and "Year"$/) do
-  assert page.has_content?('Author')
-  assert page.has_content?('Title')
-  assert page.has_content?('School')
-  assert page.has_content?('Year')
+  assert !page.has_content?('was successfully')
 end
 
 Then (/^the reference can be seen in the BibTeX format$/) do
   assert page.has_content?('@BOOK (T15, AUTHOR = "Mestari Testeri", TITLE = "Näin luot Cucumber-testejä", PUBLISHER = "Rapsutin Oy", YEAR = 2015,')
 end
+
