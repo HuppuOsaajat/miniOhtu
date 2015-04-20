@@ -4,23 +4,29 @@
 
 <table>
   <thead>
-    <tr>
-      <th>Shortname</th>
-      <th>Type</th>
-      <th colspan="3"></th>
-    </tr>
+  <tr>
+    <th>Shortname</th>
+    <th>Type</th>
+    <th colspan="3"></th>
+  </tr>
   </thead>
 
   <tbody>
-    <% @bibrefs.each do |bibref| %>
+  <% @bibrefs.each do |bibref| %>
       <tr>
         <td><%= bibref.shortname %></td>
-        <td><%= bibref.reftype%></td>
+        <td><%= bibref.reftype %></td>
+
+        <% reqfields = bibref.get_required_fields %>
+
+        <% reqfields.each do |field| %>
+            <td><%= field.content %></td>
+        <% end %>
         <td><%= link_to 'Show', bibref %></td>
         <td><%= link_to 'Edit', edit_bibref_path(bibref) %></td>
-        <td><%= link_to 'Destroy', bibref, method: :delete, data: { confirm: 'Are you sure?' } %></td>
+        <td><%= link_to 'Destroy', bibref, method: :delete, data: {confirm: 'Are you sure?'} %></td>
       </tr>
-    <% end %>
+  <% end %>
   </tbody>
 </table>
 
