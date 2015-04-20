@@ -19,15 +19,6 @@ class BibrefsController < ApplicationController
   # GET /bibrefs/new
   def new
     @bibref = Bibref.new
-
-    @bibref.reftype = "book"      #just putting this here to avoid errors
-
-    @bibref.generate_empty_req_fields
-    @bibref.generate_empty_opt_fields
-
-    @fields = @bibref.fields
-
-
   end
 
   # GET /bibrefs/1/edit

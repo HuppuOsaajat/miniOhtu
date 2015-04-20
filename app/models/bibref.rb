@@ -15,7 +15,7 @@ class Bibref < ActiveRecord::Base
           optional: [:volume, :series, :address, :edition, :month, :note, :key]
       },
       inproceedings: {
-          required: [:author, :title, :booktitle, :publisher, :year],
+          required: [:author, :title, :booktitle, :year],
           optional: [:editor, :volume, :series, :pages, :address, :month, :organization, :publisher, :note, :key]
       },
       misc: {
@@ -56,7 +56,7 @@ class Bibref < ActiveRecord::Base
 
   #Returns the field specified in @field
   def get_field(field)
-    field = Field.find_by(name: field)
+    fields.find_by(name: field)
   end
 
   def get_required_fields
@@ -79,24 +79,6 @@ class Bibref < ActiveRecord::Base
     @@reference_types[reftype.to_sym][:optional]
   end
 
-  #I'll refactor later so it's one method with a parameter but will try to get this to work first okay :D
-
-  def generate_empty_req_fields
-
-    get_required_fields.each do |r|
-      fields.new(name: r, content: '') unless fields.exists?(name: r)
-
-    end
-  end
-
-  def generate_empty_opt_fields
-    get_optional_fields.each do |r|
-      fields.new(name: r, content: '') unless fields.exists?(name: r)
-
-    end
-
-  end
-
   def update_all(attributes, fields_attributes)
     update(attributes) && update_fields(fields_attributes)
   end
@@ -105,12 +87,10 @@ class Bibref < ActiveRecord::Base
   private
 
   # Creates empty and optional Fields for this Bibref if they don't exist already
-
   def generate_empty_fields
-    all_fields = get_required_fields + get_optional_fields
+    all_fields = get_required_field_symbols + get_optional_field_symbols
     all_fields.each do |r|
       fields.create(name: r, content: '') unless fields.exists?(name: r)
-
     end
   end
 

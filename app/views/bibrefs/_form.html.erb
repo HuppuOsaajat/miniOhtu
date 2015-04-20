@@ -13,17 +13,6 @@
       <%= f.select :reftype, options_for_select(["book", "article", "inproceedings"]) %>
     </div>
 
-
-    <% @fields.each do |field| %>
-
-        <% :content == field.content %>
-        <%= f.label field.name %><br>
-        <%= f.text_field :content %><br>
-    <% end %>
-
-
-
-
     <div class="actions">
       <%= f.submit %>
     </div>
