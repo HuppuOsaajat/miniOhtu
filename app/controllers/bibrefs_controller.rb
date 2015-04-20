@@ -1,5 +1,9 @@
+require_relative '../scripts/bibtex_generator'
+
 class BibrefsController < ApplicationController
-  before_action :set_bibref, only: [:show, :edit, :update, :destroy]
+  include BibtexGenerator
+
+  before_action :set_bibref, only: [:show, :edit, :update, :destroy, :bibtex]
 
   # GET /bibrefs
   # GET /bibrefs.json
@@ -51,7 +55,7 @@ class BibrefsController < ApplicationController
   # PATCH/PUT /bibrefs/1.json
   def update
     respond_to do |format|
-      if @bibref.update(bibref_params)
+      if @bibref.update_all(bibref_params, params.require(:bibref).require(:fields_attributes))
         format.html { redirect_to @bibref, notice: 'Reference was successfully updated.' }
         format.json { render :show, status: :ok, location: @bibref }
       else
@@ -69,6 +73,21 @@ class BibrefsController < ApplicationController
       format.html { redirect_to bibrefs_url, notice: 'Reference was successfully destroyed.' }
       format.json { head :no_content }
     end
+  end
+
+  # GET /bibrefs/1/bibtex
+  def bibtex
+    @bibref_bibtex = generate_bibtex(@bibref)
+  end
+
+  # GET /bibrefs/bibtex_list
+  def bibtex_list
+    @bibrefs_bibtex = generate_all_bibtex
+  end
+
+  # GET /bibrefs/download
+  def download
+    send_data generate_all_bibtex, filename: 'references.bib'
   end
 
   private
