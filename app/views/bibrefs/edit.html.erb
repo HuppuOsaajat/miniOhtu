@@ -11,15 +11,16 @@
     <%= render 'form_errors' %>
 
     <div class="field">
-      <%= f.label :shortname %><br>
+      <%= f.label :shortname %> *<br>
       <%= f.text_field :shortname %>
     </div>
 
     <%= f.fields_for :fields do |attr_f| %>
-        <p>
-          <%= attr_f.label(:content) {attr_f.object.name} %><br>
+        <div class="field">
+          <% is_required = @bibref.get_required_field_symbols.include? attr_f.object.name.to_sym %>
+          <%= attr_f.label(:content) {attr_f.object.name} %><%= ' *' if is_required %><br>
           <%= attr_f.text_field :content %>
-        </p>
+        </div>
     <% end %>
 
     <div class="actions">
