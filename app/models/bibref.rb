@@ -79,6 +79,10 @@ class Bibref < ActiveRecord::Base
     @@reference_types[reftype.to_sym][:optional]
   end
 
+  def update_all(attributes, fields_attributes)
+    update(attributes) && update_fields(fields_attributes)
+  end
+
   private
 
     # Creates empty Fields for this Bibref if they don't exist already
@@ -91,5 +95,40 @@ class Bibref < ActiveRecord::Base
 
     def check_reftype_set
       raise "Reftype can't be empty!" if reftype.nil?
+    end
+
+    # Updates all nested fields with the given values
+    def update_fields(fields_attributes)
+      all_fields = get_required_field_symbols + get_optional_field_symbols
+      success = true
+
+      fields_attributes.each do |field|
+        field_type = all_fields[field[0].to_i]
+        field_value = field[1][:content]
+
+        if validate_field(field_type, field_value)
+          set_field_value(field_type, field_value)
+        else
+          success = false
+        end
+      end
+
+      return success
+    end
+
+    # Checks that field_value is a valid value for field_type.
+    # Should return true if valid, false if invalid and also set
+    # appropriate error messages.
+    def validate_field(field_type, field_value)
+
+      # Required field not empty?
+      if (get_required_field_symbols.include? field_type)
+        if field_value.empty?
+          @errors.add(field_type, "can't be blank")
+          return false
+        end
+      end
+
+      return true
     end
 end

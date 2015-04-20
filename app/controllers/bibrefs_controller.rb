@@ -45,7 +45,7 @@ class BibrefsController < ApplicationController
   # PATCH/PUT /bibrefs/1.json
   def update
     respond_to do |format|
-      if @bibref.update(bibref_params)
+      if @bibref.update_all(bibref_params, params.require(:bibref).require(:fields_attributes))
         format.html { redirect_to @bibref, notice: 'Reference was successfully updated.' }
         format.json { render :show, status: :ok, location: @bibref }
       else
