@@ -113,7 +113,7 @@ class Bibref < ActiveRecord::Base
     success = true
 
     fields_attributes.each do |field|
-      field_type = all_fields[field[0].to_i]
+      field_type = fields.find(field[1][:id].to_i).name.to_sym # juuh elikkäs
       field_value = field[1][:content]
 
       if validate_field(field_type, field_value)
