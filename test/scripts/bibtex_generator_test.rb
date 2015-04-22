@@ -30,7 +30,7 @@ class Bibtex_generator_test < ActiveSupport::TestCase
     assert bibtex.include? 'author = {Testari Mestari},'
     assert bibtex.include? 'year = {1994},'
     assert bibtex.include? 'publisher = {Testausoppaat},'
-    assert bibtex.include? 'title = {Näin väännät railsia},'
+    assert bibtex.include? 'title = {N\"{a}in v\"{a}\"{a}nn\"{a}t railsia},'
   end
 
 end
