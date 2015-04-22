@@ -22,7 +22,7 @@ class Bibtex_generator_test < ActiveSupport::TestCase
   end
 
   test 'bibtex has correct syntax' do
-    assert generate_bibtex(@book) =~ /^@[a-zA-Z]+ *\{ *[^,\{\}\n]+ *, *(\n* *[a-zA-Z]+ *= *\{[^\n]+\} *, *)*\n* *}/m
+    assert generate_bibtex(@book) =~ /^@[a-zA-Z]+ *\{ *[^\n]+ *, *(\n* *[a-zA-Z]+ *= *\{[^\n]+\} *, *)*\n* *}/m
   end
 
   test 'bibtex contains fields and values' do
