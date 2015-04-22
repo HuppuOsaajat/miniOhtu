@@ -38,4 +38,11 @@ class FieldTest < ActiveSupport::TestCase
     test_string = 'author = {örinåä},'
     assert_equal 'author = {\"{o}rin\r{a}\"{a}},', @field.format_special_characters(test_string)
   end
+
+  test 'field with Å, Ö and Ä is converted correctly' do
+    test_string = 'author = {ÖrinÅÄ},'
+    assert_equal 'author = {\"{O}rin\r{A}\"{A}},', @field.format_special_characters(test_string)
+  end
+
+
 end

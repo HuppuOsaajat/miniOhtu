@@ -7,6 +7,12 @@ class Field < ActiveRecord::Base
   end
 
   def format_special_characters(unformatted_bibtex)
-    unformatted_bibtex.gsub(/ä/, '\"{a}').gsub(/ö/, '\"{o}').gsub(/å/, '\r{a}')
+    unformatted_bibtex
+        .gsub(/ä/, '\"{a}')
+        .gsub(/Ä/, '\"{A}')
+        .gsub(/ö/, '\"{o}')
+        .gsub(/Ö/, '\"{O}')
+        .gsub(/å/, '\r{a}')
+        .gsub(/Å/, '\r{A}')
   end
 end
