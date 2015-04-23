@@ -14,7 +14,9 @@
 
 <ul>
   <% @bibref.get_fields.each do |field| %>
-      <li><%= field.name + ": " + field.content %></li>
+      <% unless field.content.empty? %>
+        <li><%= field.name + ": " + field.content %></li>
+      <% end %>
   <% end %>
 </ul>
 </p>
