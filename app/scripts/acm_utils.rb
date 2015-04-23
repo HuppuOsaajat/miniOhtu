@@ -14,7 +14,14 @@ module ACMUtils
 
   def get_acm_bibtex_by_id(acm_id)
     page_source = Nokogiri::HTML(open("http://dl.acm.org/exportformats.cfm?id=#{acm_id}&expformat=bibtex"))
-    page_source.css("pre").first.text
+
+    bibtex_element = page_source.css("pre").first
+
+    if bibtex_element == nil
+      raise 'Invalid ID was entered'
+    end
+
+    return bibtex_element.text
   end
 
   def bibtex_into_bibref_object(bibtex, shortname)
