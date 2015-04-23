@@ -17,8 +17,8 @@ end
 
 def create_bibref_with(reftype, shortname)
   fill_in 'Shortname', :with => shortname
-  select reftype, :from => 'Reftype'
-  click_button('Create Bibref')
+  select reftype, :from => 'Reference type'
+  click_button('Create reference')
 end
 
 
@@ -76,7 +76,7 @@ end
 
 
 When (/^the user tries to save the reference$/) do
-  click_button('Update Bibref')
+  click_button('Update reference')
 end
 
 Then (/^the reference is saved$/) do

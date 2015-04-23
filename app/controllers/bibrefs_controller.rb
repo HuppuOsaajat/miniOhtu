@@ -81,6 +81,17 @@ class BibrefsController < ApplicationController
     send_data generate_all_bibtex, filename: 'references.bib'
   end
 
+  # GET /bibrefs/search
+  # POST /bibrefs/search
+  def search
+    case request.method_symbol
+      when :get
+        search_get
+      when :post
+        search_post
+    end
+  end
+
   private
     # Use callbacks to share common setup or constraints between actions.
     def set_bibref
@@ -90,5 +101,14 @@ class BibrefsController < ApplicationController
     # Never trust parameters from the scary internet, only allow the white list through.
     def bibref_params
       params.require(:bibref).permit(:shortname, :reftype)
+    end
+
+    def search_get
+      @results = nil
+    end
+
+    def search_post
+      @query = params.permit(:query)[:query]
+      @results = Bibref.search_results(@query)
     end
 end

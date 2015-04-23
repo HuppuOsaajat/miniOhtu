@@ -55,6 +55,26 @@ class Bibref < ActiveRecord::Base
     @@reference_types.keys
   end
 
+  def self.search_results(query)
+    if query.empty? then return nil end
+
+    query.downcase!
+
+    # Matching shortname
+    results = []
+    results += Bibref.where('lower(shortname) like ?', "%#{query}%")
+
+    # Matching fields
+    Field.where('lower(content) like ?', "%#{query}%").each do |field|
+      parent_bibref = field.get_parent
+      unless results.include?(parent_bibref)
+        results += [parent_bibref]
+      end
+    end
+
+    return results
+  end
+
   #Sets the field specified in @field to @value
   def set_field_value(field, value)
     field = get_field(field)
@@ -66,14 +86,19 @@ class Bibref < ActiveRecord::Base
     fields.find_by(name: field)
   end
 
+  # Returns all fields in the correct order
+  def get_fields()
+    fields.order(:id)
+  end
+
   def get_required_fields
     required_field_symbols = get_required_field_symbols
-    fields.where(name: required_field_symbols)
+    fields.where(name: required_field_symbols).order(:id)
   end
 
   def get_optional_fields
     optional_field_symbols = get_optional_field_symbols
-    fields.where(name: optional_field_symbols)
+    fields.where(name: optional_field_symbols).order(:id)
   end
 
   def get_required_field_symbols

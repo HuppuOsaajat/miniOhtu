@@ -1,0 +1,26 @@
+<h1>Search</h1>
+
+<div id="search-field">
+  <%= form_tag(search_bibrefs_path , method: 'post') do %>
+      <%= label_tag(:query, 'Search:') %>
+      <%= text_field_tag(:query) %>
+      <%= submit_tag('Search') %>
+  <% end %>
+</div>
+
+<div id="search-results" >
+  <% unless @results.nil? %>
+      <h2>Results for "<%= @query %>"</h2>
+      <% @results.each do |bibref| %>
+          <p>
+            <%= bibref.reftype %>:
+            <%= bibref.shortname %> |
+            <%= link_to 'Show', bibref %> |
+            <%= link_to 'Edit', edit_bibref_path(bibref) %>
+            <% # TODO: better formatting for results %>
+          </p>
+      <% end %>
+  <% end %>
+</div>
+
+<%= link_to 'Back', bibrefs_path %>

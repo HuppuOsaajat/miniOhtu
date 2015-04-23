@@ -15,4 +15,8 @@ class Field < ActiveRecord::Base
         .gsub(/å/, '\r{a}')
         .gsub(/Å/, '\r{A}')
   end
+
+  def get_parent
+    Bibref.find(bibref_id)
+  end
 end
