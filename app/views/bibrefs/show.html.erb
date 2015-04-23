@@ -13,7 +13,7 @@
 <strong>Attributes:</strong>
 
 <ul>
-  <% @bibref.fields.each do |field| %>
+  <% @bibref.get_fields.each do |field| %>
       <li><%= field.name + ": " + field.content %></li>
   <% end %>
 </ul>

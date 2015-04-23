@@ -66,14 +66,19 @@ class Bibref < ActiveRecord::Base
     fields.find_by(name: field)
   end
 
+  # Returns all fields in the correct order
+  def get_fields()
+    fields.order(:id)
+  end
+
   def get_required_fields
     required_field_symbols = get_required_field_symbols
-    fields.where(name: required_field_symbols)
+    fields.where(name: required_field_symbols).order(:id)
   end
 
   def get_optional_fields
     optional_field_symbols = get_optional_field_symbols
-    fields.where(name: optional_field_symbols)
+    fields.where(name: optional_field_symbols).order(:id)
   end
 
   def get_required_field_symbols

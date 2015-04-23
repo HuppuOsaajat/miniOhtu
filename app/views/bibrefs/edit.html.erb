@@ -15,7 +15,7 @@
       <%= f.text_field :shortname %>
     </div>
 
-    <%= f.fields_for :fields do |attr_f| %>
+    <%= f.fields_for :fields, @bibref.get_fields do |attr_f| %>
         <div class="field">
           <% is_required = @bibref.get_required_field_symbols.include? attr_f.object.name.to_sym %>
           <%= attr_f.label(:content) {attr_f.object.name} %><%= ' *' if is_required %><br>
