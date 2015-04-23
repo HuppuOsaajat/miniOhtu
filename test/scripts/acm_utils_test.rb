@@ -21,9 +21,16 @@ class Bibtex_generator_test < ActiveSupport::TestCase
     assert_equal 'inproceedings', reftype_in_bibtex(bibtex)
   end
 
-  test 'ACM-url is correctly converted into ACM-id' do
+  test 'ACM-URL is correctly converted into ACM-id' do
     url = 'http://dl.acm.org/citation.cfm?id=2380552.2380613&coll=DL&dl=GUIDE'
     assert_equal '2380613', acm_url_to_acm_id(url)
+  end
+
+  test 'incorrect ACM-ID raises an error' do
+    incorrect_id = 3
+    assert_raise RuntimeError do
+      get_acm_bibtex_by_id(incorrect_id)
+    end
   end
 
 
