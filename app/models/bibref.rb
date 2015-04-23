@@ -55,6 +55,25 @@ class Bibref < ActiveRecord::Base
     @@reference_types.keys
   end
 
+  def self.search_results(query)
+    # Return empty array if query is empty
+    if query.empty? then return nil end
+
+    # Matching shortname
+    results = []
+    results += Bibref.where('shortname like ?', "%#{query}%")
+
+    # Matching fields
+    Field.where('content like ?', "%#{query}%").each do |field|
+      parent_bibref = field.get_parent
+      unless results.include?(parent_bibref)
+        results += [parent_bibref]
+      end
+    end
+
+    return results
+  end
+
   #Sets the field specified in @field to @value
   def set_field_value(field, value)
     field = get_field(field)

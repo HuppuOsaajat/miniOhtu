@@ -3,6 +3,8 @@ Rails.application.routes.draw do
     collection do
       get 'bibtex_list'
       get 'download'
+      get 'search'
+      post 'search'
     end
 
     member do
