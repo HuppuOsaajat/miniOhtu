@@ -9,11 +9,11 @@
     </div>
 
     <div class="field">
-      <%= f.label :reftype %><br>
+      <%= f.label (:reftype) { "Reference type" } %><br>
       <%= f.select :reftype, options_for_select(Bibref.possible_reftypes) %>
     </div>
 
     <div class="actions">
-      <%= f.submit %>
+      <%= f.submit "Create reference" %>
     </div>
 <% end %>
