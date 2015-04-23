@@ -56,15 +56,16 @@ class Bibref < ActiveRecord::Base
   end
 
   def self.search_results(query)
-    # Return empty array if query is empty
     if query.empty? then return nil end
+
+    query.downcase!
 
     # Matching shortname
     results = []
-    results += Bibref.where('shortname like ?', "%#{query}%")
+    results += Bibref.where('lower(shortname) like ?', "%#{query}%")
 
     # Matching fields
-    Field.where('content like ?', "%#{query}%").each do |field|
+    Field.where('lower(content) like ?', "%#{query}%").each do |field|
       parent_bibref = field.get_parent
       unless results.include?(parent_bibref)
         results += [parent_bibref]
