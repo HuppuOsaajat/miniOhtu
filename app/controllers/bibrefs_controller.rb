@@ -47,10 +47,11 @@ class BibrefsController < ApplicationController
   def update
     respond_to do |format|
       if @bibref.update_all(bibref_params, params.require(:bibref).require(:fields_attributes))
+        @bibref.generate_shortname
         format.html { redirect_to @bibref, notice: 'Reference was successfully updated.' }
         format.json { render :show, status: :ok, location: @bibref }
       else
-        format.html { render :edit }
+        format.html { render :edit, notice: 'An error prevented the reference from being updated!' }
         format.json { render json: @bibref.errors, status: :unprocessable_entity }
       end
     end

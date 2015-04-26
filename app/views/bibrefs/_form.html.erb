@@ -2,12 +2,6 @@
 
     <%= render 'form_errors' %>
 
-
-    <div class="field">
-      <%= f.label :shortname %><br>
-      <%= f.text_field :shortname %>
-    </div>
-
     <div class="field">
       <%= f.label (:reftype) { "Reference type" } %><br>
       <%= f.select :reftype, options_for_select(Bibref.possible_reftypes) %>

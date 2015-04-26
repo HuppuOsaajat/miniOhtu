@@ -3,7 +3,7 @@ class Bibref < ActiveRecord::Base
   has_many :fields, dependent: :destroy
   accepts_nested_attributes_for :fields
 
-  validates :shortname, presence: true
+  # validates :shortname, presence: true
   validates :reftype, presence: true
 
   after_save :generate_empty_fields
@@ -115,8 +115,33 @@ class Bibref < ActiveRecord::Base
     update(attributes) && update_fields(fields_attributes)
   end
 
+  def generate_shortname
+
+    shortname = get_field('author').content + get_field('year').content + (get_field('title').content.split[0] || '')
+
+
+    if shortname.blank?
+      fields = get_fields
+        fields.each do |f|
+          unless f.content.blank?
+            shortname.concat(f.content.split[0])
+          end
+
+
+        end
+
+    end
+
+    shortname.downcase!
+
+    update(shortname:shortname)
+  end
+
 
   private
+
+  # Generates a shortname for the reference using google scholar standard
+
 
   # Creates empty and optional Fields for this Bibref if they don't exist already
   def generate_empty_fields
@@ -126,9 +151,7 @@ class Bibref < ActiveRecord::Base
     end
   end
 
-  def generate_shortname
-    # shortname =
-  end
+
 
 
   def check_reftype_set

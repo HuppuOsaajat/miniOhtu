@@ -1,6 +1,5 @@
-<p id="notice"><%= notice %></p>
 
-<h1>Editing <%= @bibref.shortname %></h1>
+<h1>Editing <%= @bibref.shortname.presence || 'reference'  %></h1>
 
 
 
@@ -9,11 +8,6 @@
 <%= form_for(@bibref) do |f| %>
 
     <%= render 'form_errors' %>
-
-    <div class="field">
-      <%= f.label :shortname %> *<br>
-      <%= f.text_field :shortname %>
-    </div>
 
     <%= f.fields_for :fields, @bibref.get_fields do |attr_f| %>
         <div class="field">
