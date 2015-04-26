@@ -126,6 +126,10 @@ class Bibref < ActiveRecord::Base
     end
   end
 
+  def generate_shortname
+    # shortname =
+  end
+
 
   def check_reftype_set
     raise "Reftype can't be empty!" if reftype.nil?

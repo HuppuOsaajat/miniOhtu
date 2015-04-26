@@ -2,7 +2,7 @@
 
 <h1>Listing References</h1>
 
-<table>
+<table class="table table-striped">
   <thead>
   <tr>
     <th>Shortname</th>
@@ -32,9 +32,9 @@
             <td colspan="<%= skip_fields_count %>"></td>
         <% end %>
 
-        <td><%= link_to 'Show', bibref %></td>
-        <td><%= link_to 'Edit', edit_bibref_path(bibref) %></td>
-        <td><%= link_to 'Destroy', bibref, method: :delete, data: {confirm: 'Are you sure?'} %></td>
+        <td><%= link_to 'Show', bibref, class:'btn btn-success' %></td>
+        <td><%= link_to 'Edit', edit_bibref_path(bibref), class: 'btn btn-primary' %></td>
+        <td><%= link_to 'Destroy', bibref, method: :delete, data: {confirm: 'Are you sure?'}, class: 'btn btn-danger' %></td>
       </tr>
   <% end %>
   </tbody>
