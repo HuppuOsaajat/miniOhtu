@@ -2,7 +2,7 @@
 
 #Should be on the reference creation page before using this
 def fill_form_with_information_of(reference)
-  create_bibref_with(reference.reftype, reference.shortname)
+  create_bibref_with(reference.reftype)
 
   required_fields = reference.get_required_fields
   optional_fields = reference.get_optional_fields
@@ -15,8 +15,7 @@ def fill_form_with_information_of(reference)
 
 end
 
-def create_bibref_with(reftype, shortname)
-  fill_in 'Shortname', :with => shortname
+def create_bibref_with(reftype)
   select reftype, :from => 'Reference type'
   click_button('Create reference')
 end
