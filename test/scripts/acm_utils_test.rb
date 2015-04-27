@@ -33,5 +33,19 @@ class Bibtex_generator_test < ActiveSupport::TestCase
     end
   end
 
+  test 'bibtex is correctly turned into a bibref' do
+    bibtex = get_acm_bibtex_by_id('2380613')
+    bibref = bibtex_into_bibref_object(bibtex)
+
+    assert_equal "inproceedings", bibref.reftype
+    assert_equal "Luukkainen, Matti and Vihavainen, Arto and Vikberg, Thomas", bibref.get_field(:author).content
+    assert_equal "ACM", bibref.get_field(:publisher).content
+
+    bibtex = get_acm_bibtex_by_id('2380614')
+    bibref = bibtex_into_bibref_object(bibtex)
+
+    assert_equal 'Proceedings of the 13th Annual Conference on Information Technology Education', bibref.get_field(:booktitle).content
+  end
+
 
 end
