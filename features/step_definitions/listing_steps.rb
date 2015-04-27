@@ -23,7 +23,6 @@ Then (/^all the references can be seen in the listing as BibTeX format$/) do
   reference = Bibref.new(reftype: :misc, shortname: 'foo')
   reference.save
   reference.set_field_value(:howpublished, 'wasn\'t')
-  puts page.native
 
   visit('/bibrefs/bibtex_list')
   assert page.has_content?('list')

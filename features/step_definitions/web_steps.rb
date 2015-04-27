@@ -7,7 +7,7 @@ Given(/^the user is on the page of one reference/) do
 end
 
 Given(/^the user is on the search page$/) do
-  visit('bibfers/search')
+  visit('bibrefs/search')
 end
 
 When(/^the user clicks "([^"]*)"$/) do |link_name|
