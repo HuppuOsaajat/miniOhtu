@@ -117,7 +117,7 @@ class Bibref < ActiveRecord::Base
 
   def generate_shortname
 
-    shortname = get_field('author').content + get_field('year').content + (get_field('title').content.split[0] || '')
+    shortname = get_field('author').content.split[0] + get_field('year').content + (get_field('title').content.split[0] || '')
 
 
     if shortname.blank?
@@ -131,8 +131,6 @@ class Bibref < ActiveRecord::Base
         end
 
     end
-
-    shortname.downcase!
 
     update(shortname:shortname)
   end
