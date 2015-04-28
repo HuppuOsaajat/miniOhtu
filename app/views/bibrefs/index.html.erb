@@ -12,29 +12,7 @@
 
   <tbody>
   <% @bibrefs.each do |bibref| %>
-      <tr>
-        <td><%= bibref.shortname %></td>
-        <td><%= bibref.reftype %></td>
-
-        <% reqfields = bibref.get_required_fields %>
-
-        <% skip_fields_count = 5 %>
-
-        <% reqfields.each do |field| %>
-
-            <% skip_fields_count -= 1 %>
-
-            <td><%= field.content %></td>
-        <% end %>
-
-        <% if skip_fields_count > 0 %>
-            <td colspan="<%= skip_fields_count %>"></td>
-        <% end %>
-
-        <td><%= link_to 'Show', bibref, class:'btn btn-success' %></td>
-        <td><%= link_to 'Edit', edit_bibref_path(bibref), class: 'btn btn-primary' %></td>
-        <td><%= link_to 'Destroy', bibref, method: :delete, data: {confirm: 'Are you sure?'}, class: 'btn btn-danger' %></td>
-      </tr>
+      <%= render 'bibref_row', bibref: bibref %>
   <% end %>
   </tbody>
 </table>

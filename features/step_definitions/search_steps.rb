@@ -10,9 +10,9 @@ end
 
 
 Then(/references containing the word can be seen in the listing$/) do
-  assert page.has_content?('article:')
+  assert page.has_content?('Cucumber-rails is kinda cool')
 end
 
 Then(/the search page updates with no results$/) do
-  assert !page.has_content?('article:')
+  assert !page.has_content?('Cucumber-rails is kinda cool')
 end

@@ -44,7 +44,7 @@ class BibrefTest < ActiveSupport::TestCase
     book.generate_shortname
     article.generate_shortname
 
-    assert_equal 'Salo1994Rubyn', book.shortname
+    assert_equal 'Anna1994Rubyn', book.shortname
     assert_equal 'Anna2000Otsikko', article.shortname
   end
 
