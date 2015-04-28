@@ -115,9 +115,13 @@ class Bibref < ActiveRecord::Base
     update(attributes) && update_fields(fields_attributes)
   end
 
+
+
+  # Generates a shortname for the reference using google scholar standard
+
   def generate_shortname
 
-    shortname = get_field('author').content.split[0] + get_field('year').content + (get_field('title').content.split[0] || '')
+    shortname = (get_field('author').content.split[0]||'') + get_field('year').content + (get_field('title').content.split[0] || '')
 
 
     if shortname.blank?
@@ -137,8 +141,6 @@ class Bibref < ActiveRecord::Base
 
 
   private
-
-  # Generates a shortname for the reference using google scholar standard
 
 
   # Creates empty and optional Fields for this Bibref if they don't exist already

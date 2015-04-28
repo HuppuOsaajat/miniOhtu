@@ -17,7 +17,6 @@ module BibtexGenerator
 
     bibtex += '}'
 
-
   end
 
   def generate_all_bibtex

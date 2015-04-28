@@ -2,6 +2,7 @@ require_relative '../scripts/bibtex_generator'
 
 class BibrefsController < ApplicationController
   include BibtexGenerator
+  include ACMUtils
 
   before_action :set_bibref, only: [:show, :edit, :update, :destroy, :bibtex]
 
@@ -19,6 +20,11 @@ class BibrefsController < ApplicationController
   # GET /bibrefs/new
   def new
     @bibref = Bibref.new
+  end
+
+  def create_from_acm
+    @bibref = get_bibref_from_acm_url(url)
+
   end
 
   # GET /bibrefs/1/edit
@@ -67,6 +73,7 @@ class BibrefsController < ApplicationController
     end
   end
 
+
   # GET /bibrefs/1/bibtex
   def bibtex
     @bibref_bibtex = generate_bibtex(@bibref)
@@ -103,6 +110,8 @@ class BibrefsController < ApplicationController
     def bibref_params
       params.require(:bibref).permit(:shortname, :reftype)
     end
+
+
 
     def search_get
       @results = nil
