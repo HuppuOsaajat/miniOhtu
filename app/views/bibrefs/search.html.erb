@@ -11,15 +11,21 @@
 <div id="search-results" >
   <% unless @results.nil? %>
       <h2>Results for "<%= @query %>"</h2>
-      <% @results.each do |bibref| %>
-          <p>
-            <%= bibref.reftype %>:
-            <%= bibref.shortname %> |
-            <%= link_to 'Show', bibref %> |
-            <%= link_to 'Edit', edit_bibref_path(bibref) %>
-            <% # TODO: better formatting for results %>
-          </p>
-      <% end %>
+
+      <table class="table table-striped">
+        <thead>
+        <tr>
+          <th>Shortname</th>
+          <th>Type</th>
+          <th colspan="8"></th>
+        </tr>
+        </thead>
+        <tbody>
+        <% @results.each do |bibref| %>
+            <%= render 'bibref_row', bibref: bibref %>
+        <% end %>
+        </tbody>
+      </table>
   <% end %>
 </div>
 
