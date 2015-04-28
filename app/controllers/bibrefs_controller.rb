@@ -22,9 +22,21 @@ class BibrefsController < ApplicationController
     @bibref = Bibref.new
   end
 
-  def create_from_acm
-    @bibref = get_bibref_from_acm_url(url)
+  def new_from_acm_get
+    @bibref = Bibref.new
+  end
 
+  def new_from_acm_post
+    @bibref = get_bibref_from_acm_url(params_acm_url)
+    @bibref.generate_shortname
+
+    respond_to do |format|
+      if @bibref.save
+        format.html { redirect_to @bibref, notice: 'Reference successfully imported from ACM!' }
+      else
+        format.html { render :new_from_acm_get, notice: 'There was an error importing the reference!' }
+      end
+    end
   end
 
   # GET /bibrefs/1/edit
@@ -100,25 +112,40 @@ class BibrefsController < ApplicationController
     end
   end
 
+  def new_from_acm
+
+    case request.method_symbol
+      when :get
+        new_from_acm_get
+      when :post
+        new_from_acm_post
+    end
+
+  end
+
   private
-    # Use callbacks to share common setup or constraints between actions.
-    def set_bibref
-      @bibref = Bibref.find(params[:id])
-    end
+  # Use callbacks to share common setup or constraints between actions.
+  def set_bibref
+    @bibref = Bibref.find(params[:id])
+  end
 
-    # Never trust parameters from the scary internet, only allow the white list through.
-    def bibref_params
-      params.require(:bibref).permit(:shortname, :reftype)
-    end
+  # Never trust parameters from the scary internet, only allow the white list through.
+  def bibref_params
+    params.require(:bibref).permit(:shortname, :reftype)
+  end
 
 
+  def params_acm_url
+    @url = params.permit(:url)[:url]
+  end
 
-    def search_get
-      @results = nil
-    end
 
-    def search_post
-      @query = params.permit(:query)[:query]
-      @results = Bibref.search_results(@query)
-    end
+  def search_get
+    @results = nil
+  end
+
+  def search_post
+    @query = params.permit(:query)[:query]
+    @results = Bibref.search_results(@query)
+  end
 end

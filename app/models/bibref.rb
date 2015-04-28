@@ -136,6 +136,8 @@ class Bibref < ActiveRecord::Base
 
     end
 
+    shortname.gsub!(/\W/, '')
+
     update(shortname:shortname)
   end
 

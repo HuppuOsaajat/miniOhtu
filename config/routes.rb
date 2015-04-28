@@ -5,12 +5,15 @@ Rails.application.routes.draw do
       get 'download'
       get 'search'
       post 'search'
+      get 'new_from_acm'
+      post 'new_from_acm'
     end
 
     member do
       get 'bibtex'
     end
   end
+
 
   resources :books
 

@@ -1,0 +1,16 @@
+<h1>Import reference from ACM</h1>
+
+<p>Use an ACM url to import references!</p>
+
+
+<%= render 'form_errors' %>
+
+    <div id="url-field">
+      <%= form_tag(new_from_acm_bibrefs_path , method: 'post') do %>
+          <%= label_tag(:url, 'ACM URL:') %>
+          <%= text_field_tag(:url) %>
+          <%= submit_tag('Import') %>
+      <% end %>
+    </div>
+
+<%= link_to 'Back', bibrefs_path %>
