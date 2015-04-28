@@ -46,3 +46,4 @@ class BibrefsControllerTest < ActionController::TestCase
     assert_redirected_to bibrefs_path
   end
 end
+

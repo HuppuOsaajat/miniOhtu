@@ -27,6 +27,28 @@ class BibrefTest < ActiveSupport::TestCase
     assert opt_fields.include? :key
   end
 
+  test 'shortnames are generated correctly' do
+    book = Bibref.create(reftype: :book)
+    book.set_field_value(:author, 'Anna Salo')
+    book.set_field_value(:title, 'Rubyn perusteet')
+    book.set_field_value(:publisher, 'WSOY')
+    book.set_field_value(:year, 1994)
+
+    article = Bibref.create(reftype: :article)
+    article.set_field_value(:author, 'Anna')
+    article.set_field_value(:title, 'Otsikko')
+    article.set_field_value(:journal, 'Lehti')
+    article.set_field_value(:year, 2000)
+    article.set_field_value(:volume, 'syksy2015')
+
+    shortname1 = book.generate_shortname
+    shortname2 = article.generate_shortname
+
+    assert shortname.must_be 'Salo1994Rubyn'
+    assert shortname.must_be 'Anna2000Otsikko'
+  end
+
+
   test 'search results are correct' do
     article = Bibref.create(shortname: 'artikkeli', reftype: :article)
     article.set_field_value(:author, 'Juho Lamminmäki')
