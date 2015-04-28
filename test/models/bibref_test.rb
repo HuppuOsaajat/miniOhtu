@@ -41,11 +41,11 @@ class BibrefTest < ActiveSupport::TestCase
     article.set_field_value(:year, 2000)
     article.set_field_value(:volume, 'syksy2015')
 
-    shortname1 = book.generate_shortname
-    shortname2 = article.generate_shortname
+    book.generate_shortname
+    article.generate_shortname
 
-    assert shortname.must_be 'Salo1994Rubyn'
-    assert shortname.must_be 'Anna2000Otsikko'
+    assert_equal 'Salo1994Rubyn', book.shortname
+    assert_equal 'Anna2000Otsikko', article.shortname
   end
 
 

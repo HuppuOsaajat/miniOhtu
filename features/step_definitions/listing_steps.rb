@@ -2,9 +2,10 @@ Then (/^the reference can be seen in the listing$/) do
   assert page.has_content?('misc')
 end
 
-And (/^the user tries to delete the reference$/) do
-  click_link('Destroy')
-end
+# And (/^the user tries to delete the reference$/) do
+#
+#   click_link('bibrefs/16')
+# end
 
 Then (/^the reference can not be seen in the listing$/) do
   assert !page.has_content?('misc')
