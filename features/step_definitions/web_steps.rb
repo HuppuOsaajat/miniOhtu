@@ -20,3 +20,7 @@ end
 Then(/^the user is on the creation page$/) do
   assert_equal '/bibrefs/new', current_path
 end
+
+And(/^the user clicks the "([^"]*)"\-button$/) do |button_name|
+  click_button(button_name)
+end

@@ -2,12 +2,10 @@
 
 When(/^the user types an existing word on field$/) do
   fill_in 'Search:', :with => @article.get_field(:year).content
-
 end
 
 When(/^the user types an nonexistent word on field$/) do
   fill_in 'Search:', :with => 'trololo'
-
 end
 
 
