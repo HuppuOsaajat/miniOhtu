@@ -1,3 +1,5 @@
+
+
 Given(/^the user is on the front page$/) do
   visit('/')
 end

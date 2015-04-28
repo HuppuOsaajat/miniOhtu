@@ -1,8 +1,5 @@
-
-
-
 Then (/^the reference can be seen in the listing$/) do
-  assert page.has_content?('Näin luot Cucumber-testejä')
+  assert page.has_content?('misc')
 end
 
 And (/^the user tries to delete the reference$/) do
@@ -10,7 +7,7 @@ And (/^the user tries to delete the reference$/) do
 end
 
 Then (/^the reference can not be seen in the listing$/) do
-  assert !page.has_content?('Näin luot Cucumber-testejä')
+  assert !page.has_content?('misc')
 end
 
 

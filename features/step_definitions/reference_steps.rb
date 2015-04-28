@@ -21,56 +21,46 @@ def create_bibref_with(reftype)
 end
 
 
+
 Given (/^the user is on the reference creation page$/) do
   visit('bibrefs/new')
 end
 
-misc_test = Bibref.new(shortname: 'test', reftype: :misc)
-misc_test.save
-
 Given (/^the user inputs a misc with empty fields$/) do
 
   step 'the user is on the reference creation page'
-  fill_form_with_information_of(misc_test)
+  fill_form_with_information_of(@misc_test)
 end
 
 Given(/^the user inputs a misc with non\-empty fields$/) do
-  misc_test.set_field_value(:title, 'Testaus')
+  @misc_test.set_field_value(:title, 'Testaus')
 
   step 'the user is on the reference creation page'
-  fill_form_with_information_of(misc_test)
+  fill_form_with_information_of(@misc_test)
 end
 
 
-article = Bibref.new(shortname: 'test_article', reftype: :article)
-article.save
-article.set_field_value(:author, 'testeri')
-article.set_field_value(:journal, 'Testing Weekly')
-article.set_field_value(:title, 'Cucumber-rails is kinda cool')
-article.set_field_value(:year, 2014)
-article.set_field_value(:volume, 6)
-
 Given(/^the user correctly fills out the form for an article$/) do
   step 'the user is on the reference creation page'
-  fill_form_with_information_of(article)
+  fill_form_with_information_of(@article)
 end
 
 Given(/^the user inputs a reference with a missing required field$/) do
   step 'the user is on the reference creation page'
-  article.set_field_value(:title, '')
-  fill_form_with_information_of(article)
+  @article.set_field_value(:title, '')
+  fill_form_with_information_of(@article)
 end
 
 Given(/^the user inputs a reference with a negative year$/) do
   step 'the user is on the reference creation page'
-  article.set_field_value(:year, '-1994')
-  fill_form_with_information_of(article)
+  @article.set_field_value(:year, '-1994')
+  fill_form_with_information_of(@article)
 end
 
 Given(/^the user inputs a reference with a crazy big year$/) do
   step 'the user is on the reference creation page'
-  article.set_field_value(:year, '11994')
-  fill_form_with_information_of(article)
+  @article.set_field_value(:year, '11994')
+  fill_form_with_information_of(@article)
 end
 
 
@@ -90,3 +80,7 @@ Then (/^the reference can be seen in the BibTeX format$/) do
   assert page.has_content?('@BOOK (T15, AUTHOR = "Mestari Testeri", TITLE = "Näin luot Cucumber-testejä", PUBLISHER = "Rapsutin Oy", YEAR = 2015,')
 end
 
+
+Given(/^the user has created a reference$/) do
+  bibref = Bibref.create(:reftype => 'misc')
+end

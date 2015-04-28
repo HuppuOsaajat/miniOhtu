@@ -30,10 +30,18 @@ ActionController::Base.allow_rescue = false
 
 # Remove/comment out the lines below if your app doesn't have a database.
 # For some databases (like MongoDB and CouchDB) you may need to use :truncation instead.
+
 begin
-  DatabaseCleaner.strategy = :transaction
+  require 'database_cleaner'
+  require 'database_cleaner/cucumber'
+
+  DatabaseCleaner.strategy = :truncation
 rescue NameError
   raise "You need to add database_cleaner to your Gemfile (in the :test group) if you wish to use it."
+end
+
+Around do |scenario, block|
+  DatabaseCleaner.cleaning(&block)
 end
 
 # You may also want to configure DatabaseCleaner to use different strategies for certain features and scenarios.
@@ -56,3 +64,15 @@ end
 # See https://github.com/cucumber/cucumber-rails/blob/master/features/choose_javascript_database_strategy.feature
 Cucumber::Rails::Database.javascript_strategy = :truncation
 
+
+Before do
+  @misc_test = Bibref.create(shortname: 'test', reftype: :misc)
+
+  @article = Bibref.new(shortname: 'test_article', reftype: :article)
+  @article.save
+  @article.set_field_value(:author, 'testeri')
+  @article.set_field_value(:journal, 'Testing Weekly')
+  @article.set_field_value(:title, 'Cucumber-rails is kinda cool')
+  @article.set_field_value(:year, 2014)
+  @article.set_field_value(:volume, 6)
+end
