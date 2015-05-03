@@ -2,6 +2,9 @@
 
 Nettisivu: http://warm-beach-7855.herokuapp.com/
 
+### Loppuraportti
+https://docs.google.com/document/d/1u1YoI86v1rAcmugxzUT849I4AXmvGXpCNMnMQyG9Q0c/edit?usp=sharing
+
 #### SCRUM-BOARD
 https://docs.google.com/spreadsheets/d/1nogja9t3KxbWuu0iMwdBXvG5GVWvWWAJyOvq-miM4PQ/edit?usp=sharing
 
